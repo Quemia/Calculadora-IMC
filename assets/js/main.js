@@ -16,32 +16,34 @@ form.addEventListener("submit", function (event) {
 });
 
 function criaParagrafo(msg) {
-  let paragrafo = document.createElement("p");
+  const limpaResultado = document.querySelector('#resultado');
+  limpaResultado.innerHTML = '';
+
+  const paragrafo = document.createElement("p");
   paragrafo.setAttribute("class", "resultadoIMC");
-  paragrafo.innerText = msg;
+  paragrafo.innerHTML = msg;
   document.getElementById("resultado").appendChild(paragrafo);
 }
 
 function setResultado(IMC) {
-  let msg = "";
+  const nivel = [
+    "Abaixo do peso",
+    "Peso Normal",
+    "Sobrepeso",
+    "Obesidade Grau I",
+    "Obesidade Grau II",
+    "Obesidade Grau III",
+  ];
 
-  if (IMC <= 18.5) {
-    msg = `Seu IMC é ${IMC} (Abaixo do peso)`;
-    criaParagrafo(msg);
-  } else if (IMC > 18.5 && IMC <= 24.9) {
-    msg = `Seu IMC é ${IMC} (Peso Normal)`;
-    criaParagrafo(msg);
-  } else if (IMC > 25 && IMC <= 29.9) {
-    msg = `Seu IMC é ${IMC} (Sobrepeso)`;
-    criaParagrafo(msg);
-  } else if (IMC > 30 && IMC <= 34.9) {
-    msg = `Seu IMC é ${IMC} (Obesidade Grau I)`;
-    criaParagrafo(msg);
-  } else if (IMC > 35 && IMC <= 39.9) {
-    msg = `Seu IMC é ${IMC} (Obesidade Grau II)`;
-    criaParagrafo(msg);
-  } else {
-    msg = `Seu IMC é ${IMC} (Obesidade Grau III)`;
-    criaParagrafo(msg);
-  }
+  let msg = ``;
+  
+  if (IMC <= 18.5)  msg = `Seu IMC é ${IMC} (${nivel[0]})`;
+  if (IMC > 18.5 && IMC <= 24.9)  msg = `Seu IMC é ${IMC} (${nivel[1]})`;
+  if (IMC > 25 && IMC <= 29.9) msg = `Seu IMC é ${IMC} (${nivel[2]})`;
+  if (IMC > 30 && IMC <= 34.9) msg = `Seu IMC é ${IMC} (${nivel[3]})`;
+  if (IMC > 35 && IMC <= 39.9) msg = `Seu IMC é ${IMC} (${nivel[4]})`;
+  if (IMC > 39.9) msg = `Seu IMC é ${IMC} (${nivel[5]})`;
+  
+  criaParagrafo(msg);
+
 }
